@@ -1,4 +1,12 @@
 <script setup>
+  import { computed } from 'vue';
+import { ref }  from 'vue'
+  
+  const i = ref(0)
+  const transitionOffset = computed(() => {
+    console.log(i.value)
+    return { transform: `translateX(calc(${i.value} * (100 - (100 / 3 / 2)) / 3 * 1%))` }
+  })
 </script>
 
 <template>
@@ -6,6 +14,7 @@
     <div class="uns-carousel__wrap">
       <div
         class="uns-carousel__track"
+        :style="transitionOffset"
       >
         <div class="uns-carousel-item">
           123
@@ -41,11 +50,13 @@
       <div class="uns-carousel__controls">
         <button
           class="uns-carousel__control"
+          @click="i++"
         >
           P
         </button>
         <button
           class="uns-carousel__control"
+          @click="i--"
         >
           N
         </button>
